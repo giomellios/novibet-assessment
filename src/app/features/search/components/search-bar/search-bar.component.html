@@ -1,0 +1,26 @@
+<form class="search-form" (submit)="onSubmit($event)">
+  <mat-form-field appearance="outline" class="search-input">
+    <mat-label>Search movies by title...</mat-label>
+    <mat-icon matPrefix class="search-icon">search</mat-icon>
+    <input
+      matInput
+      type="text"
+      [formControl]="searchControl"
+      appSearchKeywordValidator
+      placeholder="E.g. Inception (min 3 chars)"
+    />
+    @if (searchControl.hasError('required') && searchControl.touched) {
+      <mat-error>The search keyword is required.</mat-error>
+    }
+    @if (searchControl.hasError('searchMinLength') && searchControl.touched) {
+      <mat-error>Minimum 3 characters are required.</mat-error>
+    }
+    @if (searchControl.hasError('searchAlphanumeric') && searchControl.touched) {
+      <mat-error>Only alphanumeric characters are allowed.</mat-error>
+    }
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" type="submit" class="search-btn" [disabled]="searchControl.invalid">
+    Search
+  </button>
+</form>

@@ -1,0 +1,44 @@
+<div class="page-container">
+	<header class="page-header header-row">
+		<div>
+			<h1 class="page-title">My Collections</h1>
+			<p class="page-subtitle">Manage custom movie collections.</p>
+		</div>
+		<a mat-flat-button color="primary" routerLink="/collections/create" class="create-btn">
+			<mat-icon>add</mat-icon> Create Collection
+		</a>
+	</header>
+
+	@if (collections().length === 0) {
+		<div class="empty-state">
+			<mat-icon class="empty-icon">video_library</mat-icon>
+			<h3>No collections yet</h3>
+			<p>Create your first movie collection to get started.</p>
+			<a mat-stroked-button color="primary" routerLink="/collections/create">Create Collection</a>
+		</div>
+	} @else {
+		<div class="collections-grid">
+			@for (collection of collections(); track collection.id) {
+				<mat-card class="collection-card mat-elevation-z2">
+					<mat-card-content class="card-content">
+						<div class="card-header">
+							<h3>{{ collection.title }}</h3>
+							<div class="movie-count-badge">
+								<mat-icon>movie</mat-icon>
+								<span>{{ collection.movies.length }}</span>
+							</div>
+						</div>
+						<p class="collection-desc">{{ collection.description || 'No description provided.' }}</p>
+					</mat-card-content>
+					<mat-card-actions class="card-actions">
+						<a mat-button color="primary" [routerLink]="['/collections', collection.id]">Open</a>
+						<span class="spacer"></span>
+						<button mat-icon-button color="warn" type="button" (click)="removeCollection(collection.id)" matTooltip="Remove">
+							<mat-icon>delete</mat-icon>
+						</button>
+					</mat-card-actions>
+				</mat-card>
+			}
+		</div>
+	}
+</div>

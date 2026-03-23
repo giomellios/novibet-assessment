@@ -1,0 +1,43 @@
+<div class="page-container">
+@if (collection(); as currentCollection) {
+	<header class="page-header header-row">
+		<div class="header-info">
+			<a mat-button class="back-link" routerLink="/collections">
+				<mat-icon>arrow_back</mat-icon> Back to Collections
+			</a>
+			<h1 class="page-title">{{ currentCollection.title }}</h1>
+			<p class="page-subtitle">{{ currentCollection.description }}</p>
+			<div class="movie-count">
+				<mat-icon>movie</mat-icon> {{ currentCollection.movies.length }} movies in this collection
+			</div>
+		</div>
+	</header>
+
+	@if (currentCollection.movies.length === 0) {
+		<div class="empty-state">
+			<mat-icon class="empty-icon">theaters</mat-icon>
+			<h3>This collection is empty</h3>
+			<p>Find your favorite films and build this collection.</p>
+			<a mat-flat-button color="primary" routerLink="/">Go to Search</a>
+		</div>
+	} @else {
+		<div class="movies-grid">
+			@for (movie of currentCollection.movies; track movie.id) {
+				<app-movie-card
+					[movie]="movie"
+					[showRemove]="true"
+					(details)="openMovieDetails($event)"
+					(remove)="removeMovie($event)"
+				></app-movie-card>
+			}
+		</div>
+	}
+} @else {
+	<div class="empty-state not-found">
+		<mat-icon class="empty-icon">search_off</mat-icon>
+		<h3>Collection not found</h3>
+		<p>The collection you are looking for does not exist or has been removed.</p>
+		<a mat-flat-button color="primary" routerLink="/collections">Back to My Collections</a>
+	</div>
+}
+</div>

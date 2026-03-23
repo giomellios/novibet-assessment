@@ -1,0 +1,29 @@
+<div class="page-container form-container">
+	<header class="page-header">
+		<h1 class="page-title">Create Collection</h1>
+		<p class="page-subtitle">Define a new collection to organize your favorite films.</p>
+	</header>
+
+	<form [formGroup]="form" (ngSubmit)="createCollection()" class="create-form">
+		<mat-form-field appearance="outline">
+			<mat-label>Title</mat-label>
+			<input matInput formControlName="title" placeholder="e.g. Sci-Fi Favorites" />
+			@if (form.controls.title.invalid && form.controls.title.touched) {
+				<mat-error>Title is required and should be at least 3 characters.</mat-error>
+			}
+		</mat-form-field>
+
+		<mat-form-field appearance="outline">
+			<mat-label>Description</mat-label>
+			<textarea matInput rows="6" formControlName="description" placeholder="What kind of movies go here?"></textarea>
+			@if (form.controls.description.invalid && form.controls.description.touched) {
+				<mat-error>Description is required.</mat-error>
+			}
+		</mat-form-field>
+
+		<div class="form-actions">
+			<button mat-stroked-button type="button" (click)="cancel()">Cancel</button>
+			<button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Create Collection</button>
+		</div>
+	</form>
+</div>

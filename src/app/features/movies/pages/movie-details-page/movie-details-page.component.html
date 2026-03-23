@@ -1,0 +1,52 @@
+<section class="overlay" (click)="close()" (keydown.enter)="close()" tabindex="0" role="button" aria-label="Close modal">
+	<mat-card class="popup" (click)="$event.stopPropagation()">
+		<div class="header-row">
+			<h2>Movie Details</h2>
+			<button mat-icon-button (click)="close()" aria-label="Close details popup">
+				<mat-icon>close</mat-icon>
+			</button>
+		</div>
+
+		@if (loading()) {
+			<div class="loading"><mat-spinner diameter="48"></mat-spinner></div>
+		} @else {
+			@if (movie(); as currentMovie) {
+				<div class="details-grid">
+					<img [src]="currentMovie.posterUrl" [alt]="currentMovie.title" />
+
+					<div class="meta">
+						<h3>{{ currentMovie.title }}</h3>
+						<p>{{ currentMovie.overview }}</p>
+
+						<ul>
+							<li><strong>Poster Path:</strong> {{ currentMovie.posterPath || 'N/A' }}</li>
+							<li><strong>Budget:</strong> {{ currentMovie.budget | currency: 'USD' }}</li>
+							<li><strong>Release Date:</strong> {{ currentMovie.releaseDate | date }}</li>
+							<li><strong>Revenue:</strong> {{ currentMovie.revenue | currency: 'USD' }}</li>
+							<li><strong>Vote Average:</strong> {{ currentMovie.rating | number: '1.1-1' }}</li>
+							<li><strong>Vote Count:</strong> {{ currentMovie.voteCount }}</li>
+							<li>
+								<strong>Spoken Languages:</strong>
+								{{ spokenLanguagesText() }}
+							</li>
+						</ul>
+
+						<div class="rating-section">
+							<div class="rating-form">
+								<mat-form-field appearance="outline" subscriptSizing="dynamic">
+									<mat-label>Your Rating</mat-label>
+									<mat-select [ngModel]="rating()" (ngModelChange)="rating.set($event)">
+										@for (option of ratingOptions; track option) {
+											<mat-option [value]="option">{{ option }}</mat-option>
+										}
+									</mat-select>
+								</mat-form-field>
+								<button mat-flat-button color="primary" class="submit-rating-btn" (click)="submitRating()">Submit Rating</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		}
+	</mat-card>
+</section>

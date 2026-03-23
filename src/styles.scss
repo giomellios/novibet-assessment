@@ -1,0 +1,62 @@
+@use '@angular/material' as mat;
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Global Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* Common Layout Utilities */
+.page-container {
+  padding: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  min-height: calc(100vh - 120px);
+}
+
+.page-header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 1rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.025em;
+}
+
+.page-subtitle {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Buttons */
+.mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-unelevated-button, .mat-mdc-outlined-button {
+  border-radius: 8px !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em !important;
+}

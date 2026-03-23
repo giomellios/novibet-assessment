@@ -1,0 +1,31 @@
+<mat-card
+  class="movie-card mat-elevation-z2"
+  role="button"
+  tabindex="0"
+  (click)="openDetails()"
+  (keydown.enter)="openDetails()"
+  (keydown.space)="$event.preventDefault(); openDetails()"
+>
+  <div class="card-image-container">
+    <img mat-card-image [src]="movie.posterUrl || fallbackPosterUrl" [alt]="movie.title" />
+    <div class="vote-badge" [class.high-rating]="movie.rating >= 7" [class.mid-rating]="movie.rating >= 5 && movie.rating < 7" [class.low-rating]="movie.rating < 5">
+      {{ movie.rating | number: '1.1-1' }}
+    </div>
+  </div>
+  <mat-card-content class="card-content">
+    <h3 class="movie-title" [title]="movie.title">{{ movie.title }}</h3>
+  </mat-card-content>
+  <mat-card-actions class="card-actions" (click)="$event.stopPropagation()">
+    @if (showSelection) {
+      <mat-checkbox class="select-checkbox" color="primary" [checked]="selected" (click)="$event.stopPropagation()" (change)="onSelectionChange($event.checked)"></mat-checkbox>
+    }
+
+    <span class="spacer"></span>
+
+    @if (showRemove) {
+      <button mat-icon-button color="warn" type="button" (click)="removeMovie()" matTooltip="Remove">
+		<mat-icon>delete</mat-icon>
+	  </button>
+    }
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Add Movies To Collection</h2>
+
+<mat-dialog-content>
+	@if (collections().length === 0) {
+		<p>You do not have any collections yet. Create one first.</p>
+	} @else {
+		<mat-radio-group [(ngModel)]="selectedCollectionId" class="collection-selector">
+			@for (collection of collections(); track collection.id) {
+				<mat-radio-button [value]="collection.id" class="collection-option">
+					<strong>{{ collection.title }}</strong>
+					<span>{{ collection.movies.length }} movies</span>
+				</mat-radio-button>
+			}
+		</mat-radio-group>
+	}
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button mat-button (click)="cancel()">Cancel</button>
+	<button mat-flat-button color="primary" (click)="confirm()" [disabled]="!selectedCollectionId">Add</button>
+</mat-dialog-actions>

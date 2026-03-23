@@ -1,0 +1,29 @@
+.actions-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.clear-btn {
+  color: #334155;
+}
+
+.add-collection-btn {
+  height: 56px;
+  padding: 0 1.5rem;
+}
+
+.add-collection-btn mat-icon {
+  margin-right: 8px;
+}
+
+@media (max-width: 680px) {
+  .actions-group {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .add-collection-btn {
+    width: 100%;
+  }
+}

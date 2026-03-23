@@ -1,0 +1,79 @@
+<div class="page-container">
+	<header class="page-header">
+		<div class="header-content">
+			<div>
+				<h1 class="page-title">Discover Movies</h1>
+				<p class="page-subtitle">Find your favorite films and add them to your custom collections.</p>
+			</div>
+		</div>
+	</header>
+
+	<div class="search-and-actions">
+		<app-search-bar
+			[initialQuery]="initialQuery()"
+			(queryChanged)="onQueryChanged($event)"
+			(searchSubmitted)="onSearchSubmitted($event)"
+		></app-search-bar>
+	</div>
+
+	<div class="results-container">
+		@if (results().length > 0) {
+			<div class="results-header">
+				<h2 class="results-title">Search Results</h2>
+			</div>
+		}
+
+		@if (loading()) {
+			<div class="loading-state">
+				<mat-spinner diameter="40"></mat-spinner>
+			</div>
+		} @else if (errorMessage()) {
+			<div class="error-state">
+				<mat-icon>error_outline</mat-icon>
+				<p>{{ errorMessage() }}</p>
+			</div>
+		} @else if (results().length > 0) {
+			<div class="results-grid">
+				@for (movie of results(); track movie.id) {
+					<app-movie-card
+						[movie]="movie"
+						[showSelection]="true"
+						[selected]="isMovieSelected(movie.id)"
+						(selectionChange)="toggleMovieSelection(movie, $event)"
+						(details)="openMovieDetails($event)"
+					></app-movie-card>
+				}
+			</div>
+
+			<mat-paginator
+				[length]="totalResults()"
+				[pageIndex]="currentPage() - 1"
+				[pageSize]="pageSize"
+				[showFirstLastButtons]="true"
+				(page)="onPageChange($event)"
+			></mat-paginator>
+		} @else if (hasSearched()) {
+			<div class="empty-state">
+				<mat-icon class="empty-icon">movie_filter</mat-icon>
+				<h3>No movies found</h3>
+				<p>Try adjusting your search terms.</p>
+			</div>
+		}
+	</div>
+
+	<div class="bulk-action-bar" [class.is-visible]="hasSelectedMovies()">
+		<div class="bulk-action-inner">
+			<div class="bulk-action-copy">
+				<mat-icon>check_circle</mat-icon>
+				<span>{{ selectedMoviesCount() }} selected</span>
+			</div>
+			<div class="bulk-action-controls">
+				<app-add-to-collection-action
+					[selectedMovies]="selectedMoviesList()"
+					(moviesAdded)="onMoviesAddedToCollection()"
+					(clearRequested)="clearSelection()"
+				></app-add-to-collection-action>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,163 @@
+.overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(15, 23, 42, 0.75);
+	backdrop-filter: blur(4px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	padding: 1rem;
+}
+
+.popup {
+	width: min(900px, 100%);
+	max-height: 90vh;
+	overflow-y: auto;
+	border-radius: 16px;
+	padding: 2rem;
+	box-sizing: border-box;
+}
+
+.header-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2rem;
+	border-bottom: 1px solid #e2e8f0;
+	padding-bottom: 1rem;
+
+	h2 {
+		margin: 0;
+		font-size: 1.5rem;
+		font-weight: 500;
+		color: #1e293b;
+	}
+}
+
+.details-grid {
+	display: grid;
+	grid-template-columns: 320px 1fr;
+	gap: 2.5rem;
+}
+
+.details-grid img {
+	width: 100%;
+	border-radius: 12px;
+	box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+	object-fit: cover;
+}
+
+.meta {
+	display: flex;
+	flex-direction: column;
+}
+
+.meta h3 {
+	margin: 0 0 1rem 0;
+	font-size: 2rem;
+	line-height: 1.2;
+	color: #0f172a;
+}
+
+.meta > p {
+	color: #475569;
+	line-height: 1.6;
+	font-size: 1.05rem;
+	margin: 0 0 2rem 0;
+}
+
+.meta ul {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 2.5rem 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 1rem;
+}
+
+.meta ul li {
+	background: #f8fafc;
+	padding: 1rem;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	border: 1px solid #e2e8f0;
+}
+
+.meta ul li strong {
+	color: #64748b;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.rating-section {
+	margin-top: auto;
+	background: #f1f5f9;
+	padding: 1.5rem;
+	border-radius: 12px;
+	border: 1px solid #e2e8f0;
+}
+
+.rating-form {
+	display: flex;
+	gap: 1rem;
+	align-items: stretch;
+}
+
+.rating-form mat-form-field {
+	flex: 1;
+}
+
+.submit-rating-btn {
+	height: 56px;
+	padding: 0 2rem;
+	font-size: 1.05rem;
+}
+
+.loading {
+	display: flex;
+	justify-content: center;
+	padding: 4rem 0;
+}
+
+@media (max-width: 800px) {
+	.popup {
+		padding: 1.25rem;
+	}
+
+	.header-row {
+		margin-bottom: 1.5rem;
+	}
+
+	.details-grid {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+
+	.details-grid img {
+		max-width: 280px;
+		margin: 0 auto;
+		display: block;
+	}
+
+	.meta h3 {
+		font-size: 1.5rem;
+		text-align: center;
+	}
+
+	.meta ul {
+		grid-template-columns: 1fr;
+	}
+
+	.rating-form {
+		flex-direction: column;
+	}
+
+	.submit-rating-btn {
+		width: 100%;
+	}
+}

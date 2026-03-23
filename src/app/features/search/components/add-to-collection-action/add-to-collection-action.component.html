@@ -1,0 +1,16 @@
+<div class="actions-group">
+  <button mat-button type="button" class="clear-btn" (click)="clearSelection()" [disabled]="selectedMoviesCount === 0">
+    Clear
+  </button>
+
+  <button
+    mat-stroked-button
+    color="primary"
+    class="add-collection-btn"
+    (click)="openAddToCollectionDialog()"
+    [disabled]="selectedMoviesCount === 0"
+  >
+    <mat-icon>library_add</mat-icon>
+    Add {{ selectedMoviesCount > 0 ? '(' + selectedMoviesCount + ')' : '' }} To Collection
+  </button>
+</div>
